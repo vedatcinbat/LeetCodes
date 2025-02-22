@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -65,5 +66,30 @@ class Solution {
         }
 
         return output;
+    }
+
+
+    // Max Profit
+    // You are given an array "prices" where "prices[i]" is the price of a given stock on the "ith" day
+    // You want to maximize your profit by choosing a single day to buy stock
+    // and choosing a different day in the future to sett that stock
+    // Return the maximum profit you can achieve from this transaction.
+    // If you cannot achieve any profit, return 0
+    // prices = [7, 1, 5, 3, 6, 4] Output: 5 -> Buy on day2:1 and sell on day5:6 profit: 6-1: 5
+    // prices = [7, 6, 4, 3, 1] Output: 0 -> No profit
+
+    public int maxProfit(int[] prices) {
+        int minPrice = Integer.MAX_VALUE;
+        int maxProfit = 0;
+
+        for(int price : prices) {
+            if(price < minPrice) {
+                minPrice = price;
+            }else {
+                maxProfit = Math.max(maxProfit, price-minPrice);
+            }
+        }
+
+        return maxProfit;
     }
 }
