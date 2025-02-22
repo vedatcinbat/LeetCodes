@@ -1,3 +1,7 @@
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+
 class ListNode {
     int val;
     ListNode next;
@@ -32,5 +36,34 @@ class Solution {
         }
 
         return k;
+    }
+
+    // Majority Element
+    // Given an array "nums" of size "n", return the majority element
+    // The majority element is the element that appears more than [n / 2] times.
+    // nums = [3, 2, 3] output: 3 | nums = [2,2,1,1,1,2,2] Output: 2 (size is: 7 / 2 -> 3 times)
+    public int majorityElement(int[] nums) {
+        int size = nums.length;
+        int output = 0;
+        HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+
+        for (int num : nums) {
+            if (map.containsKey(num)) {
+                map.replace(num, map.get(num) + 1);
+            } else {
+                map.put(num, 1);
+            }
+        }
+
+        int timeSeen = size / 2;
+
+        for (int num : nums) {
+            int appearCount = map.getOrDefault(num, 0);
+            if (appearCount > timeSeen) {
+                output = num;
+            }
+        }
+
+        return output;
     }
 }
